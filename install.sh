@@ -7,8 +7,13 @@ arch=$(uname -m)
 goOs="$(tr '[:upper:]' '[:lower:]' <<< ${os})"
 goArch=""
 
+if [ "${goOs}" != "darwin" ] && [ "${goOs}" != "linux" ]; then
+    echo "Unsupported operating system: ${os}"
+    exit 1
+fi
+
 if [ "${arch}" == "x86_64" ]; then
-    goArch="amd64" 
+    goArch="amd64"
 else
     echo "Unsupported arch ${arch}\n"
     exit 1
